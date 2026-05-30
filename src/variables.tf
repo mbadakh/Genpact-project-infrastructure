@@ -1,7 +1,7 @@
 variable "location" {
   description = "Azure region for all resources."
   type        = string
-  default     = "eastus"
+  default     = "israelcentral"
 }
 
 variable "resource_group_name" {
@@ -55,7 +55,7 @@ variable "aks_cluster_name" {
 variable "kubernetes_version" {
   description = "Kubernetes version for the AKS cluster."
   type        = string
-  default     = "1.29"
+  default     = "1.36"
 }
 
 variable "node_pool_vm_size" {
@@ -79,7 +79,7 @@ variable "min_node_count" {
 variable "max_node_count" {
   description = "Maximum number of nodes when autoscaling is enabled."
   type        = number
-  default     = 5
+  default     = 2
 }
 
 variable "acr_name" {
@@ -91,7 +91,9 @@ variable "acr_name" {
 variable "acr_sku" {
   description = "SKU for the container registry (Basic, Standard, or Premium)."
   type        = string
-  default     = "Standard"
+  # only the Premium option allows, private endpoints which allows services in Vnet to access it internally
+  # this doesnt change the answer for how AKS authenticates with ACR, so ill keep it at basic
+  default     = "Basic"
 
   validation {
     condition     = contains(["Basic", "Standard", "Premium"], var.acr_sku)
