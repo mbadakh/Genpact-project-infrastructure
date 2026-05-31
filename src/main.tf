@@ -91,7 +91,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     dns_service_ip    = "172.16.0.10"
   }
 
-  # Restrict access to the API server (set to your CI/CD or management CIDR in production)
+  # controls what IPs and ranges can access the k8s api
   api_server_access_profile {
     authorized_ip_ranges = ["0.0.0.0/0"]
   }
