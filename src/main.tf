@@ -79,14 +79,13 @@ resource "azurerm_kubernetes_cluster" "main" {
     }
   }
 
-  # Use system-assigned managed identity — no service principal credentials to rotate
   identity {
     type = "SystemAssigned"
   }
 
   network_profile {
-    network_plugin    = "azure"        # Azure CNI — pods get VNet IPs
-    network_policy    = "calico"       # Pod-level network policy enforcement
+    network_plugin    = "azure" 
+    network_policy    = "calico"
     load_balancer_sku = "standard"
     service_cidr      = "172.16.0.0/16"
     dns_service_ip    = "172.16.0.10"
